@@ -105,7 +105,8 @@ export const helpers: Helpers = {
 };
 
 try {
-  if (globalThis.localStorage) {
+  // Node 26 warns when its localStorage getter is read without --localstorage-file.
+  if (typeof window !== "undefined" && globalThis.localStorage) {
     polyfills.localStorage = globalThis.localStorage;
   }
 } catch (e) {
